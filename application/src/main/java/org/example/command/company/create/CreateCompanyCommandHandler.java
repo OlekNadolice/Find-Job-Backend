@@ -20,10 +20,10 @@ public class CreateCompanyCommandHandler implements IRequestHandler<CreateCompan
 
 
     @Override
-    public Object execute(CreateCompanyCommand command) {
+    public void execute(CreateCompanyCommand command) {
        var c =  mapToCompany(command);
        this.companyRepository.save(c);
-        return null;
+
     }
 
     public Company mapToCompany(CreateCompanyCommand command) {

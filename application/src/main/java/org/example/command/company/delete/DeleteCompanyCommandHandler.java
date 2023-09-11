@@ -17,9 +17,9 @@ public class DeleteCompanyCommandHandler implements IRequestHandler<DeleteCompan
     }
 
     @Override
-    public Object execute(DeleteCompanyCommand command) {
+    public void execute(DeleteCompanyCommand command) {
         this.companyRepository.deleteById(command.companyId());
-        return  null;
+
     }
 
 

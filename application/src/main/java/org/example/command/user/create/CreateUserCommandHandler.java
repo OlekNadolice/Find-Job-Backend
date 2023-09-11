@@ -15,8 +15,8 @@ public class CreateUserCommandHandler implements IRequestHandler<CreateUserComma
     }
 
     @Override
-    public Object execute(CreateUserCommand command) {
-    return  null;
+    public void execute(CreateUserCommand command) {
+
     }
 
     @Override

@@ -17,8 +17,8 @@ public class DeleteUserCommandHandler implements IRequestHandler<DeleteUserComma
     }
 
     @Override
-    public Object execute(DeleteUserCommand command) {
-        return  null;
+    public void execute(DeleteUserCommand command) {
+
     }
 
     @Override
