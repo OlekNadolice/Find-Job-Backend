@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -13,8 +14,8 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy =  GenerationType.UUID)
+    private UUID id;
 
 
     @Enumerated(value = EnumType.STRING)

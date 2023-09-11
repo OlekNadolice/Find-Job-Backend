@@ -9,6 +9,7 @@ import org.example.Entities.Company.Company;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,8 +18,7 @@ import java.util.Set;
 public class CustomUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String firstName;
 
