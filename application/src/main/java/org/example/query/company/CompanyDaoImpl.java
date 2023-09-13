@@ -9,6 +9,7 @@ import org.example.repositories.Company.CompanyQueryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CompanyDaoImpl implements  CompanyDao {
@@ -20,7 +21,7 @@ public class CompanyDaoImpl implements  CompanyDao {
         this.companyQueryRepository = companyQueryRepository;
     }
 
-    public CompanyDTO getCompanyById(Long companyId) {
+    public CompanyDTO getCompanyById(UUID companyId) {
         var company  = this.companyQueryRepository.findById(companyId);
         return company.map(CompanyMapper::ToCompanyDTO)
                 .orElseThrow(()

@@ -9,7 +9,7 @@ public record CompanyDTO(String companyName,
                          String companyImage,
                          String companyDescription,
                          Set<CompanyCategory> companyCategories,
-                         Long companyId,
+                         java.util.UUID companyId,
                          String companyAddress,
                          Date companyCreationDate,
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/companies")
@@ -39,7 +40,7 @@ public class CompanyQueryController {
             @ApiResponse(responseCode = "404"),
     })
     @GetMapping("/{companyId}")
-    public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable Long companyId) {
+    public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable UUID companyId) {
         var company = this.companyDao.getCompanyById(companyId);
         return ResponseEntity.ok(company);
     }
