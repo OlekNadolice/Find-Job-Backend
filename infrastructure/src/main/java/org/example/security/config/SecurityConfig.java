@@ -1,10 +1,12 @@
-package org.example.security;
+package org.example.security.config;
 
 
 import org.example.security.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,12 +15,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private  final JwtFilter jwtFilter;
+    private final JwtFilter jwtFilter;
 
     public SecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
@@ -31,7 +35,9 @@ public class SecurityConfig {
                     httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 }).addFilterBefore(this.jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
-                        a -> a.anyRequest().permitAll()
+                        a -> a.requestMatchers(antMatcher("/auth/**")).permitAll()
+                                .anyRequest()
+                                .authenticated()
                 );
 
         return http.build();
@@ -40,6 +46,13 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 

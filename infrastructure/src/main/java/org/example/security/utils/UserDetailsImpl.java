@@ -1,4 +1,4 @@
-package org.example.security;
+package org.example.security.utils;
 
 import org.example.Entities.User.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
