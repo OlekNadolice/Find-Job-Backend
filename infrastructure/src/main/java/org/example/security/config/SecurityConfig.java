@@ -4,11 +4,13 @@ package org.example.security.config;
 import org.example.security.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +21,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
@@ -30,14 +32,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(Customizer.withDefaults())
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> {
+
+                http.sessionManagement(httpSecuritySessionManagementConfigurer -> {
                     httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 }).addFilterBefore(this.jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                        .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        a -> a.requestMatchers(antMatcher("/auth/**")).permitAll()
-                                .anyRequest()
-                                .authenticated()
+                        a ->
+                                a.requestMatchers(antMatcher("/auth/**")).permitAll()
+                                        .requestMatchers(antMatcher(HttpMethod.POST, "/users")).permitAll()
+                                        .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
+                                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                                        .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
+                                        .anyRequest()
+                                        .authenticated()
                 );
 
         return http.build();
