@@ -37,6 +37,7 @@ public class SecurityConfig {
                     httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 }).addFilterBefore(this.jwtFilter, UsernamePasswordAuthenticationFilter.class)
                         .csrf(AbstractHttpConfigurer::disable)
+                        .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         a ->
                                 a.requestMatchers(antMatcher("/auth/**")).permitAll()
@@ -46,6 +47,7 @@ public class SecurityConfig {
                                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
                                         .anyRequest()
                                         .authenticated()
+
                 );
 
         return http.build();
