@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.example.security.jwt.config.JwtConfig;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,17 +15,16 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-
-    @Value("${spring.jwt.secret}")
-    private String jwtSecret;
+    private  final JwtConfig jwtConfig;
 
 
-    @Value("${spring.jwt.expiration}")
-    private Long jwtExpiration;
+    public JwtService(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
+    }
 
     public String generateJwtToken(String username, List<String> roles) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + this.jwtExpiration * 1000);
+        Date expiryDate = new Date(now.getTime() + jwtConfig.getExpiration() * 1000);
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", roles);
         return Jwts.builder()
@@ -33,7 +32,7 @@ public class JwtService {
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, this.jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret())
                 .compact();
     }
 
@@ -49,7 +48,7 @@ public class JwtService {
 
     public boolean validateJwt(String token) {
         try {
-            Jwts.parser().setSigningKey(this.jwtSecret).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(jwtConfig.getSecret()).parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
@@ -58,7 +57,7 @@ public class JwtService {
 
     public String extractUsernameFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(this.jwtSecret)
+                .setSigningKey(jwtConfig.getSecret())
                 .parseClaimsJws(token)
                 .getBody();
 
