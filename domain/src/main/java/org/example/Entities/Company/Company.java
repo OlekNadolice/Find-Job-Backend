@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.Entities.User.CustomUser;
 
 import java.util.Date;
 import java.util.Objects;
@@ -41,9 +42,9 @@ public class Company {
 
     private String companyImage;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "user_id")
-//    private CustomUser owner;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private CustomUser owner;
 
 
     @Override
