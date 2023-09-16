@@ -1,8 +1,9 @@
-package org.example.Entities.User;
+package org.example.entities.role;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.entities.user.CustomUser;
 
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
 
@@ -23,7 +24,7 @@ public class Role {
 
 
     @ManyToMany(mappedBy = "roles")
-    Set<CustomUser> users;
+    private Set<CustomUser> users;
 
 
     @Override

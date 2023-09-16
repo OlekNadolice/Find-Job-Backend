@@ -1,4 +1,4 @@
-package org.example.Entities.Company;
+package org.example.entities.company;
 
 
 import jakarta.persistence.*;
@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.Entities.User.CustomUser;
+import org.example.entities.advertisement.Advertisement;
+import org.example.entities.employer.Employer;
+
 
 import java.util.Date;
 import java.util.Objects;
@@ -42,9 +44,14 @@ public class Company {
 
     private String companyImage;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private CustomUser owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employer_id", referencedColumnName = "id")
+    private Employer employer;
+
+
+    @OneToMany(mappedBy = "company")
+    private  Set<Advertisement> advertisements;
 
 
     @Override

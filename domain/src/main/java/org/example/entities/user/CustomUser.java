@@ -1,12 +1,11 @@
-package org.example.Entities.User;
+package org.example.entities.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.Entities.Company.Company;
+import org.example.entities.role.Role;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -37,8 +36,7 @@ public class CustomUser {
     )
     private Set<Role> roles;
 
-    @OneToMany()
-    private List<Company> companies;
+
 
     @Override
     public boolean equals(Object o) {

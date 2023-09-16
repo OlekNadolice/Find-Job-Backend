@@ -1,4 +1,4 @@
-package org.example.Entities.Company;
+package org.example.entities.company;
 
 public enum CompanyCategory {
     TECHNOLOGY,
