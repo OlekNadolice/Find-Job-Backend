@@ -1,6 +1,6 @@
 package org.example.security.utils;
 
-import org.example.Entities.User.CustomUser;
+import org.example.entities.user.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

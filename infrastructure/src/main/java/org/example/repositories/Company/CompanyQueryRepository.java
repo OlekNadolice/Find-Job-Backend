@@ -2,9 +2,8 @@ package org.example.repositories.Company;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.example.Entities.Company.Company;
+import org.example.entities.company.Company;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
