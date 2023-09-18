@@ -8,8 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.advertisement.Advertisement;
 import org.example.entities.employer.Employer;
+import org.example.enums.CompanyCategoryType;
+import org.example.valueobjects.NipNumber;
+import org.example.valueobjects.RegonNumber;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -26,21 +30,23 @@ public class Company {
 
     private String companyName;
 
-    @ElementCollection(targetClass = CompanyCategory.class)
+    @ElementCollection(targetClass = CompanyCategoryType.class)
     @Enumerated(EnumType.STRING)
-    private Set<CompanyCategory> companyCategory;
+    private Set<CompanyCategoryType> companyCategory;
 
     private String  companyDescription;
 
     private String companyAddress;
 
+    @Embedded()
     @Column(unique = true)
-    private Long companyNipNumber;
+    private NipNumber companyNipNumber;
 
+    @Embedded()
     @Column(unique = true)
-    private Long companyRegonNumber;
+    private RegonNumber companyRegonNumber;
 
-    private Date companyCreationDate;
+    private LocalDate companyCreationDate;
 
     private String companyImage;
 
