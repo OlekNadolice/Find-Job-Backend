@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.role.Role;
+import org.example.enums.RoleType;
 
 import java.util.Objects;
 import java.util.Set;
@@ -30,11 +31,7 @@ public class CustomUser {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
+    private Set<RoleType> roles;
 
 
 
