@@ -1,14 +1,12 @@
 package org.example.entities.applicant;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.advertisement.Advertisement;
 import org.example.entities.employee.Employee;
+import org.example.enums.ApplicationStatusType;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -34,7 +32,8 @@ public class Applicant {
     private Employee employee;
 
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatusType status;
 
 
     @Override

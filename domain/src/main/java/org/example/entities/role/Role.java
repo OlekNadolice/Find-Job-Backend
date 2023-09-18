@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.entities.user.CustomUser;
+import org.example.enums.RoleType;
 
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class Role {
 
 
     @Enumerated(value = EnumType.STRING)
-    private RoleEnum name;
+    private RoleType name;
 
 
     @ManyToMany(mappedBy = "roles")
