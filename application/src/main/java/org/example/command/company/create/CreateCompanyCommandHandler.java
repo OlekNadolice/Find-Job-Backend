@@ -1,8 +1,8 @@
 package org.example.command.company.create;
 
-import org.example.Entities.Company.Company;
+import org.example.entities.company.Company;
 import org.example.IRequestHandler;
-import org.example.repositories.Company.CompanyCommandRepository;
+import org.example.repositories.company.CompanyCommandRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

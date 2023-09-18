@@ -4,9 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.example.Entities.Company.CompanyCategory;
 import org.example.IRequest;
+import org.example.enums.CompanyCategoryType;
+import org.example.valueobjects.NipNumber;
+import org.example.valueobjects.RegonNumber;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -20,23 +23,23 @@ public class CreateCompanyCommand implements IRequest {
     private final String companyImage;
 
     @NotNull(message = "Company category is required")
-    private final Set<CompanyCategory> companyCategories;
+    private final Set<CompanyCategoryType> companyCategories;
     @NotBlank(message = "Company description is required")
     @Size(max = 500, message = "Maximum length for company description exceeded")
     private final String companyDescription;
     @NotBlank(message = "Address is required")
     private final String companyAddress;
     @NotNull(message = "Nip number is required")
-    private final Long companyNipNumber;
+    private final NipNumber companyNipNumber;
     @NotNull(message = "Regon number is required")
-    private final Long companyRegonNumber;
+    private final RegonNumber companyRegonNumber;
     @NotNull(message = "Creation date is required")
-    private final Date companyCreationDate;
+    private final LocalDate companyCreationDate;
 
     private final UUID id;
 
 
-    public CreateCompanyCommand(String companyName, String companyImage, Set<CompanyCategory> companyCategories, String companyDescription, String companyAddress, Long companyNipNumber, Long companyRegonNumber, Date companyCreationDate) {
+    public CreateCompanyCommand(String companyName, String companyImage, Set<CompanyCategoryType> companyCategories, String companyDescription, String companyAddress, NipNumber companyNipNumber, RegonNumber companyRegonNumber, LocalDate companyCreationDate) {
         this.companyName = companyName;
         this.companyImage = companyImage;
         this.companyCategories = companyCategories;
