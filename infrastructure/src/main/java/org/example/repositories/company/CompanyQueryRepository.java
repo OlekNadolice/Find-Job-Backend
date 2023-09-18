@@ -1,4 +1,4 @@
-package org.example.repositories.Company;
+package org.example.repositories.company;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

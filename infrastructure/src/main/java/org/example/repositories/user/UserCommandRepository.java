@@ -1,4 +1,4 @@
-package org.example.repositories.User;
+package org.example.repositories.user;
 
 
 import org.example.entities.user.CustomUser;

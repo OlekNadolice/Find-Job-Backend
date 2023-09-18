@@ -1,7 +1,6 @@
 package org.example.security.utils;
 
-import org.example.repositories.User.UserQueryRepository;
-import org.example.security.utils.UserDetailsImpl;
+import org.example.repositories.user.UserQueryRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
