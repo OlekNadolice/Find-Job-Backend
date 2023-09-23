@@ -23,13 +23,21 @@ public class ApiExceptionHandler {
             var value = fieldError.getDefaultMessage();
             errors.put(key, value);
         }
-        return  ApiError.buildErrorResponse("Bad request", HttpStatus.BAD_REQUEST, errors);
-    };
+        return ApiError.buildErrorResponse("Bad request", HttpStatus.BAD_REQUEST, errors);
+    }
+
+    ;
 
 
     @ExceptionHandler(RecordNotFoundException.class)
     public ResponseEntity<Object> handleApiRequestException(RuntimeException ex) {
         return ApiError.buildErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<Object> validationRequestException(ErrorBuilder errorBuilder) {
+    return  ApiError.buildErrorResponse(errorBuilder.getErrorMessage(), errorBuilder.getHttpStatus(), errorBuilder.getFieldErrors());
     }
 
 }
