@@ -2,7 +2,7 @@ package org.example.command.user.delete;
 
 import org.example.IRequestHandler;
 import org.example.command.company.delete.DeleteCompanyCommand;
-import org.example.repositories.User.UserCommandRepository;
+import org.example.repositories.user.UserCommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -8,6 +8,7 @@ import org.example.entities.advertisement.Advertisement;
 import org.example.entities.employee.Employee;
 import org.example.enums.ApplicationStatusType;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -34,6 +35,9 @@ public class Applicant {
 
     @Enumerated(EnumType.STRING)
     private ApplicationStatusType status;
+
+
+    private LocalDate dateOfApplication;
 
 
     @Override

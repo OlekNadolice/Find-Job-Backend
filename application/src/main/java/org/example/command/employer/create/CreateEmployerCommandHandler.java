@@ -6,10 +6,12 @@ import org.example.entities.role.Role;
 import org.example.entities.user.CustomUser;
 import org.example.enums.RoleType;
 import org.example.repositories.employer.EmployerCommandRepository;
+import org.example.repositories.role.RoleQueryRepository;
 import org.example.security.authentication.AuthService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,9 +22,12 @@ public class CreateEmployerCommandHandler implements IRequestHandler<CreateEmplo
 
     private  final EmployerCommandRepository employerCommandRepository;
 
-    public CreateEmployerCommandHandler(AuthService authService, EmployerCommandRepository employerCommandRepository) {
+    private  final RoleQueryRepository roleQueryRepository;
+
+    public CreateEmployerCommandHandler(AuthService authService, EmployerCommandRepository employerCommandRepository, RoleQueryRepository roleQueryRepository) {
         this.authService = authService;
         this.employerCommandRepository = employerCommandRepository;
+        this.roleQueryRepository = roleQueryRepository;
     }
 
     @Override
@@ -34,7 +39,8 @@ public class CreateEmployerCommandHandler implements IRequestHandler<CreateEmplo
     @Transactional
     public void execute(CreateEmployerCommand command) {
         CustomUser user = this.authService.registerUser(command);
-        user.setRoles(Set.of(RoleType.EMPLOYER));
+        Optional<Role> role = roleQueryRepository.findByName(RoleType.EMPLOYER);
+        role.ifPresent(value -> user.setRoles(Set.of(value)));
         Employer employer = new Employer();
         employer.setId(UUID.randomUUID());
         employer.setUser(user);

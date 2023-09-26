@@ -35,7 +35,7 @@ public class CustomUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<RoleType> role;
+    private Set<Role> roles;
 
 
 

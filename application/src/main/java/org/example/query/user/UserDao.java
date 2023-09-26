@@ -1,6 +1,8 @@
 package org.example.query.user;
 
-import org.example.repositories.User.UserQueryRepository;
+import org.example.exceptions.RecordNotFoundException;
+
+import org.example.repositories.user.UserQueryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -19,5 +21,9 @@ public class UserDao {
     public Object getUserById(UUID userId) {
     var user = this.userQueryRepository.findById(userId);
     return null;
-    }
-}
+//   return user.map(UserMapper)
+//            .orElseThrow(() ->
+//                    new RecordNotFoundException("User with a given id doesnt exists"));
+//
+//    }
+}}

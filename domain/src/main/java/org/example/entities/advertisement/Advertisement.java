@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.example.entities.applicant.Applicant;
 import org.example.entities.company.Company;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -19,6 +20,27 @@ public class Advertisement {
 
     @Id
     private UUID id;
+
+    private String title;
+
+    private String description;
+
+    private String currency;
+
+    private String money;
+
+    private String formOfEmployment;
+
+    private boolean isActive;
+
+
+    private String seniorityLevel;
+
+    private List<String> requirements;
+
+    private List<String> placesOfWork;
+
+    private  List<String> benefits;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
