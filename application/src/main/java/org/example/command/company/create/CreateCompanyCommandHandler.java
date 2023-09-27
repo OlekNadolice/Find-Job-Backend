@@ -28,7 +28,7 @@ public class CreateCompanyCommandHandler implements IRequestHandler<CreateCompan
 
     public Company mapToCompany(CreateCompanyCommand command) {
         var company = new Company();
-        company.setCompanyAddress(command.getCompanyAddress());
+        company.setAddress(command.getCompanyAddress());
         company.setCompanyCategory(command.getCompanyCategories());
         company.setCompanyCreationDate(command.getCompanyCreationDate());
         company.setCompanyImage(command.getCompanyImage());
