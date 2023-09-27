@@ -7,14 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.advertisement.Advertisement;
+import org.example.entities.category.Category;
 import org.example.entities.employer.Employer;
-import org.example.enums.CompanyCategoryType;
 import org.example.valueobjects.NipNumber;
 import org.example.valueobjects.RegonNumber;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -30,9 +29,8 @@ public class Company {
 
     private String companyName;
 
-    @ElementCollection(targetClass = CompanyCategoryType.class)
-    @Enumerated(EnumType.STRING)
-    private Set<CompanyCategoryType> companyCategory;
+    @ManyToMany(mappedBy = "company")
+    private Set<Category> companyCategory;
 
     private String  companyDescription;
 
