@@ -2,6 +2,7 @@ package org.example.entities.role;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.user.CustomUser;
 import org.example.enums.RoleType;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Role {
 
     @Id
