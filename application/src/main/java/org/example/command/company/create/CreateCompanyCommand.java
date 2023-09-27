@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.example.IRequest;
-import org.example.enums.CompanyCategoryType;
+import org.example.entities.category.Category;
 import org.example.valueobjects.NipNumber;
 import org.example.valueobjects.RegonNumber;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public class CreateCompanyCommand implements IRequest {
     private final String companyImage;
 
     @NotNull(message = "Company category is required")
-    private final Set<CompanyCategoryType> companyCategories;
+    private final Set<Category> companyCategories;
     @NotBlank(message = "Company description is required")
     @Size(max = 500, message = "Maximum length for company description exceeded")
     private final String companyDescription;
@@ -39,7 +39,7 @@ public class CreateCompanyCommand implements IRequest {
     private final UUID id;
 
 
-    public CreateCompanyCommand(String companyName, String companyImage, Set<CompanyCategoryType> companyCategories, String companyDescription, String companyAddress, NipNumber companyNipNumber, RegonNumber companyRegonNumber, LocalDate companyCreationDate) {
+    public CreateCompanyCommand(String companyName, String companyImage, Set<Category> companyCategories, String companyDescription, String companyAddress, NipNumber companyNipNumber, RegonNumber companyRegonNumber, LocalDate companyCreationDate) {
         this.companyName = companyName;
         this.companyImage = companyImage;
         this.companyCategories = companyCategories;
