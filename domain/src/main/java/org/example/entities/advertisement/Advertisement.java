@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.example.entities.applicant.Applicant;
 import org.example.entities.benefit.Benefit;
 import org.example.entities.company.Company;
+import org.example.entities.employment.Employment;
 import org.example.entities.requirement.Requirement;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public class Advertisement {
 
     private String money;
 
-    private String formOfEmployment;
+    @ManyToMany(mappedBy =  "advertisement")
+    private List<Employment> formOfEmployment;
 
     private boolean isActive;
 
