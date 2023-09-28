@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.applicant.Applicant;
+import org.example.entities.benefit.Benefit;
 import org.example.entities.company.Company;
+import org.example.entities.requirement.Requirement;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,11 +38,13 @@ public class Advertisement {
 
     private String seniorityLevel;
 
-    private List<String> requirements;
+    @OneToMany(mappedBy = "advertisement")
+    private List<Requirement> requirements;
 
     private List<String> placesOfWork;
 
-    private  List<String> benefits;
+    @OneToMany(mappedBy = "advertisement")
+    private  List<Benefit> benefits;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

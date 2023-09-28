@@ -1,0 +1,8 @@
+CREATE TABLE ADMIN
+(
+id uuid PRIMARY KEY,
+user_id uuid,
+FOREIGN KEY(user_id) REFERENCES CUSTOM_USER(id)
+
+
+)
