@@ -9,6 +9,7 @@ import org.example.entities.benefit.Benefit;
 import org.example.entities.company.Company;
 import org.example.entities.employment.Employment;
 import org.example.entities.requirement.Requirement;
+import org.example.entities.seniority.Seniority;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +38,8 @@ public class Advertisement {
 
     private boolean isActive;
 
-
-    private String seniorityLevel;
+    @ManyToMany(mappedBy = "advertisement")
+    private List<Seniority> seniorityLevels;
 
     @OneToMany(mappedBy = "advertisement")
     private List<Requirement> requirements;
