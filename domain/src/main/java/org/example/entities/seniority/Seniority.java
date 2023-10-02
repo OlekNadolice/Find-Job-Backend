@@ -24,7 +24,7 @@ public class Seniority {
 
     @ManyToMany()
     @JoinTable(name = "advertisement_seniority_level",
-            joinColumns = @JoinColumn(name = "seniority_level"),
+            joinColumns = @JoinColumn(name = "seniority_id"),
     inverseJoinColumns = @JoinColumn(name = "advertisement_id"))
     private List<Advertisement> advertisement;
 

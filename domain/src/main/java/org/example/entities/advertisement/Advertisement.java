@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.entities.address.Address;
 import org.example.entities.applicant.Applicant;
 import org.example.entities.benefit.Benefit;
 import org.example.entities.company.Company;
 import org.example.entities.employment.Employment;
 import org.example.entities.requirement.Requirement;
 import org.example.entities.seniority.Seniority;
+import org.example.valueobjects.Salary;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,9 +31,8 @@ public class Advertisement {
 
     private String description;
 
-    private String currency;
-
-    private String money;
+    @Embedded
+    private Salary salary;
 
     @ManyToMany(mappedBy =  "advertisement")
     private List<Employment> formOfEmployment;
@@ -44,7 +45,8 @@ public class Advertisement {
     @OneToMany(mappedBy = "advertisement")
     private List<Requirement> requirements;
 
-    private List<String> placesOfWork;
+    @ManyToMany(mappedBy = "advertisements")
+    private List<Address> placesOfWork;
 
     @OneToMany(mappedBy = "advertisement")
     private  List<Benefit> benefits;
