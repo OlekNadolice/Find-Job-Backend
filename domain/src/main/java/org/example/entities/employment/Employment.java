@@ -24,7 +24,7 @@ public class Employment {
     private String form;
 
     @ManyToMany()
-    @JoinTable(name = "company_employment_type", joinColumns = @JoinColumn(name = "employment_id"),
+    @JoinTable(name = "advertisement_employment_type", joinColumns = @JoinColumn(name = "employment_id"),
     inverseJoinColumns = @JoinColumn(name = "advertisement_id")
     )
     private List<Advertisement> advertisement;

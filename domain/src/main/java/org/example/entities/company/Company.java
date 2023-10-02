@@ -36,7 +36,7 @@ public class Company {
 
     private String  companyDescription;
 
-    @OneToMany(mappedBy = "company")
+    @ManyToMany(mappedBy = "company")
     private List<Address> address;
 
     @Embedded()
