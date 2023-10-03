@@ -37,7 +37,7 @@ public class Applicant {
     private ApplicationStatusType status;
 
 
-    private LocalDate dateOfApplication;
+    private LocalDate applicationDate;
 
 
     @Override
