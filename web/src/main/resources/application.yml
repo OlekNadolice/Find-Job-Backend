@@ -9,5 +9,5 @@ spring:
     enabled: true
     change-log: classpath:/changelog.xml
   profiles:
-    active: test
+    active: dev
 

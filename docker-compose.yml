@@ -10,5 +10,18 @@ services:
       POSTGRES_DB: job
     ports:
       - '5432:5432'
+  application:
+    image: find-job-app
+    container_name: find-job-app
+    build: ./
+    depends_on:
+      - postgres
+    ports:
+      - '8080:8080'
+
+
+
+
+
 
 
