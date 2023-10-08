@@ -30,7 +30,7 @@ public class CreateCompanyCommandHandler implements IRequestHandler<CreateCompan
         var company = new Company();
         company.setAddress(command.getCompanyAddress());
         company.setCompanyCategory(command.getCompanyCategories());
-        company.setCompanyCreationDate(command.getCompanyCreationDate());
+        company.setCreationDate(command.getCompanyCreationDate());
         company.setCompanyImage(command.getCompanyImage());
         company.setCompanyName(command.getCompanyName());
         company.setCompanyDescription(command.getCompanyDescription());
@@ -43,6 +43,6 @@ public class CreateCompanyCommandHandler implements IRequestHandler<CreateCompan
 
     @Override
     public boolean supportsOperation(Object command) {
-        return CreateCompanyCommand.class.equals(command);
+        return CreateCompanyCommand.class.getSimpleName().equals(command);
     }
 }

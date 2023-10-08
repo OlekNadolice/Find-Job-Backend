@@ -32,7 +32,7 @@ public class CreateEmployerCommandHandler implements IRequestHandler<CreateEmplo
 
     @Override
     public boolean supportsOperation(Object operation) {
-        return CreateEmployerCommand.class.equals(operation.getClass());
+        return CreateEmployerCommand.class.getSimpleName().equals(operation);
     }
 
     @Override

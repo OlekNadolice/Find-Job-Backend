@@ -17,11 +17,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 
-@Configuration
+@Configuration()
 @EnableWebSecurity()
 public class SecurityConfig {
 
@@ -36,7 +37,7 @@ public class SecurityConfig {
 
                 http.sessionManagement(httpSecuritySessionManagementConfigurer -> {
                     httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                }).addFilterBefore(this.jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                })
                         .csrf(AbstractHttpConfigurer::disable)
                         .cors(Customizer.withDefaults())
                         .headers(httpSecurityHeadersConfigurer -> {
@@ -44,15 +45,15 @@ public class SecurityConfig {
                         })
                 .authorizeHttpRequests(
                         a ->
-                                a.requestMatchers(antMatcher("/auth/**")).permitAll()
-                                        .requestMatchers(antMatcher(HttpMethod.POST, "/users")).permitAll()
+                                a.requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
+                                        .requestMatchers(antMatcher(HttpMethod.POST, "/employer")).permitAll()
+                                        .requestMatchers(antMatcher(HttpMethod.POST, "/employee")).permitAll()
                                         .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                                         .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
-                                        .anyRequest()
-                                        .authenticated()
+                                        .anyRequest().authenticated()
 
-                );
+                ).addFilterBefore(this.jwtFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling(Customizer.withDefaults());
 
         return http.build();
     }
