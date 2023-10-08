@@ -47,7 +47,8 @@ public class Company {
     @Column(unique = true)
     private RegonNumber companyRegonNumber;
 
-    private LocalDate companyCreationDate;
+
+    private LocalDate creationDate;
 
     private String companyImage;
 

@@ -27,7 +27,7 @@ public class Mediator implements  IMediator {
         this.validator.validate(request);
         var beans = this.applicationContext.getBeansOfType(IRequestHandler.class).values();
         Optional<IRequestHandler> requestHandler = beans.stream()
-                .filter(handler -> handler.supportsOperation(request.getClass()))
+                .filter(handler -> handler.supportsOperation(request.getClass().getSimpleName()))
                 .findFirst();
 
         if(requestHandler.isEmpty()) {

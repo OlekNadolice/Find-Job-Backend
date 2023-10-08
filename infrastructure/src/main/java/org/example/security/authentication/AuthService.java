@@ -60,6 +60,7 @@ public class AuthService {
         CustomUser user = new CustomUser();
         user.setId(data.getId());
         user.setEmailAddress(data.getEmailAddress());
+        user.setFirstName(data.getFirstName());
         user.setLastName(data.getLastName());
         user.setPassword(data.getPassword());
         this.userCommandRepository.save(user);

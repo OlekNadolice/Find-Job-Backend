@@ -3,12 +3,13 @@ package org.example.security.authentication;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
 
 
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor(force = true)
 public class RegisterUserDTO {
 
     @NotBlank(message = "First name is required")
