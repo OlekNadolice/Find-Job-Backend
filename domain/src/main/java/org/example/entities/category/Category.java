@@ -18,6 +18,7 @@ import java.util.UUID;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Enumerated(EnumType.STRING)

@@ -18,6 +18,7 @@ import java.util.UUID;
 public class Employer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
 

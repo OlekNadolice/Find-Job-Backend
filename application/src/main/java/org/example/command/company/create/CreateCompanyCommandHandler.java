@@ -36,7 +36,6 @@ public class CreateCompanyCommandHandler implements IRequestHandler<CreateCompan
         company.setCompanyDescription(command.getCompanyDescription());
         company.setCompanyNipNumber(command.getCompanyNipNumber());
         company.setCompanyRegonNumber(command.getCompanyRegonNumber());
-        company.setId(command.getId());
         return company;
     }
 

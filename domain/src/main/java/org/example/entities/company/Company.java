@@ -27,6 +27,7 @@ import java.util.UUID;
 public class Company {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String companyName;

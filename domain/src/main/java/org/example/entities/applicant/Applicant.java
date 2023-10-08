@@ -20,6 +20,7 @@ public class Applicant {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
 

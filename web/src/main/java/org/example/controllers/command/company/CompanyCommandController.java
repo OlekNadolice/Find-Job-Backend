@@ -6,25 +6,22 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.example.command.company.create.CreateCompanyCommand;
 import org.example.command.company.delete.DeleteCompanyCommand;
-import org.example.dto.company.CompanyDTO;
 import org.example.mediator.Mediator;
-import org.example.query.company.CompanyDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyCommandController {
    private final Mediator mediator;
 
-   private  final CompanyDao companyDao;
 
-    public CompanyCommandController(Mediator mediator, CompanyDao companyDao) {
+
+    public CompanyCommandController(Mediator mediator) {
         this.mediator = mediator;
-        this.companyDao = companyDao;
+
     }
 
 
@@ -35,10 +32,9 @@ public class CompanyCommandController {
             @ApiResponse(responseCode = "400"),
     })
     @PostMapping
-    public ResponseEntity<CompanyDTO> createCompany(@Valid @RequestBody CreateCompanyCommand command) {
+    public ResponseEntity<Void> createCompany(@Valid @RequestBody CreateCompanyCommand command) {
         mediator.processRequest(command);
-        var company = this.companyDao.getCompanyById(command.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(company);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
@@ -48,7 +44,7 @@ public class CompanyCommandController {
             @ApiResponse(responseCode = "404")
     })
     @DeleteMapping("/{companyId}")
-    public ResponseEntity deleteCompany(@PathVariable DeleteCompanyCommand command) {
+    public ResponseEntity<Void> deleteCompany(@PathVariable DeleteCompanyCommand command) {
         mediator.processRequest(command);
         return  ResponseEntity.noContent().build();
     }};
