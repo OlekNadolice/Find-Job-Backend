@@ -42,7 +42,6 @@ public class CreateEmployerCommandHandler implements IRequestHandler<CreateEmplo
         Optional<Role> role = roleQueryRepository.findByName(RoleType.EMPLOYER);
         role.ifPresent(value -> user.setRoles(Set.of(value)));
         Employer employer = new Employer();
-        employer.setId(UUID.randomUUID());
         employer.setUser(user);
         employerCommandRepository.save(employer);
 

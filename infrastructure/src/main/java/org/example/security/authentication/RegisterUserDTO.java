@@ -24,7 +24,7 @@ public class RegisterUserDTO {
     @NotBlank(message = "Password is required")
     private final String password;
 
-    private final UUID id;
+
 
 
 
@@ -34,6 +34,6 @@ public class RegisterUserDTO {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.id = UUID.randomUUID();
+
     }
 }

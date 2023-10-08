@@ -38,7 +38,7 @@ public class CreateCompanyCommand implements IRequest {
     @NotNull(message = "Creation date is required")
     private final LocalDate companyCreationDate;
 
-    private final UUID id;
+
 
 
     public CreateCompanyCommand(String companyName, String companyImage, Set<Category> companyCategories, String companyDescription, List<Address> companyAddress, NipNumber companyNipNumber, RegonNumber companyRegonNumber, LocalDate companyCreationDate) {
@@ -50,6 +50,6 @@ public class CreateCompanyCommand implements IRequest {
         this.companyNipNumber = companyNipNumber;
         this.companyRegonNumber = companyRegonNumber;
         this.companyCreationDate = companyCreationDate;
-        this.id = UUID.randomUUID();
+
     }
 }
