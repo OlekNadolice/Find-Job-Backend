@@ -45,7 +45,8 @@ public class SecurityConfig {
                         })
                 .authorizeHttpRequests(
                         a ->
-                                a.requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
+                                a.requestMatchers(antMatcher("/error")).permitAll()
+                                        .requestMatchers(antMatcher("/auth/**")).permitAll()
                                         .requestMatchers(antMatcher(HttpMethod.POST, "/employer")).permitAll()
                                         .requestMatchers(antMatcher(HttpMethod.POST, "/employee")).permitAll()
                                         .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()

@@ -16,6 +16,7 @@ import java.util.UUID;
 public class Admin {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
 

@@ -4,9 +4,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import io.jsonwebtoken.security.Keys;
 import org.example.security.jwt.config.JwtConfig;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +35,7 @@ public class JwtService {
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret())
+                .signWith(this.getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -41,6 +44,11 @@ public class JwtService {
     }
 
 
+    private Key getSigningKey() {
+        byte[] keyBytes = jwtConfig.getSecret().getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
     public boolean isJwtInHeaderAndStartsWithBearer(String token) {
         return token != null && token.startsWith("Bearer");
     }
@@ -48,7 +56,7 @@ public class JwtService {
 
     public boolean validateJwt(String token) {
         try {
-            Jwts.parser().setSigningKey(jwtConfig.getSecret()).parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(this.getSigningKey()).build().parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
@@ -56,8 +64,9 @@ public class JwtService {
     }
 
     public String extractUsernameFromToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtConfig.getSecret())
+        Claims claims =   Jwts.parserBuilder()
+                .setSigningKey(this.getSigningKey())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
 

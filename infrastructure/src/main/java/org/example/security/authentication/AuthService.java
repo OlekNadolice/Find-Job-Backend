@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -23,16 +24,18 @@ public class AuthService {
 
     private final UserCommandRepository userCommandRepository;
 
+    private  final PasswordEncoder passwordEncoder;
+
 
 
 
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthService(JwtService jwtService, UserCommandRepository userCommandRepository, AuthenticationManager authenticationManager) {
+    public AuthService(JwtService jwtService, UserCommandRepository userCommandRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.jwtService = jwtService;
         this.userCommandRepository = userCommandRepository;
-
+        this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
 
@@ -52,10 +55,11 @@ public class AuthService {
 
     public CustomUser registerUser(RegisterUserDTO data) {
         CustomUser user = new CustomUser();
+        String password = passwordEncoder.encode(data.getPassword());
         user.setEmailAddress(data.getEmailAddress());
         user.setFirstName(data.getFirstName());
         user.setLastName(data.getLastName());
-        user.setPassword(data.getPassword());
+        user.setPassword(password);
         this.userCommandRepository.save(user);
         return user;
 
