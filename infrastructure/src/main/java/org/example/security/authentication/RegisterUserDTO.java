@@ -1,12 +1,15 @@
 package org.example.security.authentication;
 
 
+
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.valueobjects.EmailAddress;
+import org.example.valueobjects.Password;
 
-
-import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(force = true)
@@ -18,18 +21,21 @@ public class RegisterUserDTO {
     @NotBlank(message = "Last name is required")
     private final String lastName;
 
-    @NotBlank(message = "Email address is required")
-    private final String emailAddress;
 
-    @NotBlank(message = "Password is required")
-    private final String password;
+    @Valid()
+    private final EmailAddress emailAddress;
 
 
+    @Valid()
+    private final Password password;
 
 
 
 
-    public RegisterUserDTO(String firstName, String lastName, String emailAddress, String password) {
+
+
+
+    public RegisterUserDTO(String firstName, String lastName, EmailAddress emailAddress, Password password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;

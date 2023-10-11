@@ -9,8 +9,8 @@ spring:
     enabled: true
     change-log: classpath:/changelog.xml
   datasource:
-      url: jdbc:postgresql://postgres:5432/job
-      #    url: jdbc:postgresql://localhost:5432/job
+#      url: jdbc:postgresql://postgres:5432/job
+      url: jdbc:postgresql://localhost:5432/job
       username: admin
       password: password
 

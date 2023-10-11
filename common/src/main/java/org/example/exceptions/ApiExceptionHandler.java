@@ -19,14 +19,14 @@ public class ApiExceptionHandler {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         Map<String, String> errors = new HashMap<>();
         for (var fieldError : fieldErrors) {
-            var key = fieldError.getField();
+            var key = formatFieldError(fieldError.getField());
             var value = fieldError.getDefaultMessage();
             errors.put(key, value);
         }
         return ApiError.buildErrorResponse("Bad request", HttpStatus.BAD_REQUEST, errors);
     }
 
-    ;
+
 
 
     @ExceptionHandler(RecordNotFoundException.class)
@@ -36,8 +36,19 @@ public class ApiExceptionHandler {
 
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Object> validationRequestException(ErrorBuilder errorBuilder) {
-    return  ApiError.buildErrorResponse(errorBuilder.getErrorMessage(), errorBuilder.getHttpStatus(), errorBuilder.getFieldErrors());
+    public ResponseEntity<Object> validationRequestException(ValidationException ex) {
+    return  ApiError.buildErrorResponse(ex.errorBuilder().getErrorMessage(), ex.errorBuilder().getHttpStatus(), ex.errorBuilder().getFieldErrors());
+    }
+
+
+    public String formatFieldError(String field) {
+
+        if(field.contains(".")) {
+         int index =   field.indexOf(".");
+         return field.substring(0, index);
+        }
+
+        return field;
     }
 
 }

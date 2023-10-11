@@ -17,6 +17,6 @@ public interface IValidator {
 
     void runValidation(IRequest command , Optional<ICommandValidator> validator, ErrorBuilder errorBuilder);
 
-    void handleExceptions();
+    void handleExceptions(ErrorBuilder errorBuilder);
 
 }
