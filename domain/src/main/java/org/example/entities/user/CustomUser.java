@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.entities.role.Role;
-import org.example.enums.RoleType;
+import org.example.valueobjects.EmailAddress;
+import org.example.valueobjects.Password;
 
 import java.util.Objects;
 import java.util.Set;
@@ -25,10 +26,18 @@ public class CustomUser {
 
     private String lastName;
 
-    @Column(unique = true)
-    private String emailAddress;
 
-    private String password;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "value", column = @Column(name = "emailAddress", nullable = false, unique = true))
+    })
+    private EmailAddress emailAddress;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "value", column = @Column(name = "password", nullable = false))
+    })
+    private Password password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

@@ -3,10 +3,13 @@ package org.example.command.employer.create;
 import org.example.ICommandValidator;
 import org.example.exceptions.ErrorBuilder;
 import org.example.repositories.user.UserQueryRepository;
+import org.example.valueobjects.EmailAddress;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateEmployerCommandValidator implements ICommandValidator<CreateEmployerCommand> {
 
-    private UserQueryRepository userQueryRepository;
+    private final UserQueryRepository userQueryRepository;
 
 
     public CreateEmployerCommandValidator(UserQueryRepository userQueryRepository) {
@@ -22,11 +25,11 @@ public class CreateEmployerCommandValidator implements ICommandValidator<CreateE
 
     @Override
     public boolean supportsCommand(Object command) {
-        return command.getClass().equals(CreateEmployerCommand.class);
+        return CreateEmployerCommand.class.getSimpleName().equals(command);
     }
 
 
-    public void validateIfEmailIsAlreadyTaken(String emailAddress, ErrorBuilder errorBuilder) {
+    public void validateIfEmailIsAlreadyTaken(EmailAddress emailAddress, ErrorBuilder errorBuilder) {
         var user = userQueryRepository.findByEmailAddress(emailAddress);
 
         if(user.isPresent()) {

@@ -6,6 +6,7 @@ import org.example.IRequest;
 import org.example.exceptions.ErrorBuilder;
 import org.example.exceptions.ValidationException;
 import org.springframework.context.ApplicationContext;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,20 +14,21 @@ import java.util.Optional;
 @Service
 public class Validator implements  IValidator{
 
-    private final ErrorBuilder errorBuilder;
+
 
     private  final ApplicationContext applicationContext;
 
-    public Validator(ErrorBuilder errorBuilder, ApplicationContext applicationContext) {
-        this.errorBuilder = errorBuilder;
+    public Validator(ApplicationContext applicationContext) {
+
         this.applicationContext = applicationContext;
     }
 
     public void validate(IRequest command) {
+        ErrorBuilder errorBuilder = new ErrorBuilder();
        var validator = findValidator(command);
        if(validator.isPresent()) {
            runValidation(command, validator, errorBuilder);
-           handleExceptions();
+           handleExceptions(errorBuilder);
        }
 
 
@@ -35,7 +37,7 @@ public class Validator implements  IValidator{
     public Optional<ICommandValidator> findValidator(IRequest command) {
         var validatorBeans = this.applicationContext.getBeansOfType(ICommandValidator.class).values();
        return validatorBeans.stream()
-                .filter(v -> v.supportsCommand(command.getClass())).findFirst();
+                .filter(v -> v.supportsCommand(command.getClass().getSimpleName())).findFirst();
 
     };
 
@@ -44,7 +46,7 @@ public class Validator implements  IValidator{
     }
 
 
-    public void handleExceptions() {
+    public void handleExceptions(ErrorBuilder errorBuilder) {
         if(errorBuilder.containsErrors()) {
            throw new ValidationException(errorBuilder);
 

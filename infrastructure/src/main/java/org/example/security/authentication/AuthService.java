@@ -5,6 +5,7 @@ import org.example.entities.user.CustomUser;
 import org.example.repositories.user.UserCommandRepository;
 import org.example.security.jwt.InvalidCredentialsException;
 import org.example.security.jwt.JwtService;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -55,11 +56,11 @@ public class AuthService {
 
     public CustomUser registerUser(RegisterUserDTO data) {
         CustomUser user = new CustomUser();
-        String password = passwordEncoder.encode(data.getPassword());
+        String password = passwordEncoder.encode(data.getPassword().value());
         user.setEmailAddress(data.getEmailAddress());
         user.setFirstName(data.getFirstName());
         user.setLastName(data.getLastName());
-        user.setPassword(password);
+        user.setPassword(data.getPassword());
         this.userCommandRepository.save(user);
         return user;
 
