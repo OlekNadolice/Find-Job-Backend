@@ -18,7 +18,7 @@ import java.util.Objects;
 @EqualsAndHashCode(of = "value")
 public class Password {
 
-    private static final String pattern = "\"^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$\"";
+    private static final String pattern = "^(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~])(?=.*[A-Za-z])[\\w!@#$%^&*()_+{}\\[\\]:;<>,.?~]{8,}$";
 
     @NotBlank(message = "Password is required")
     @Pattern(message = "Password must contains at least 8 characters and one special sign", regexp = pattern)
