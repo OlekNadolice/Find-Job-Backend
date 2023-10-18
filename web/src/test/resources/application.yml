@@ -1,9 +1,6 @@
 spring:
+  liquibase:
+    enabled: false
   jwt:
     secret: 12312321k3ksadas942232332dsjhnfbdsiouhfsopuhf9p248hr92348her239eh239phe13pu9eh1ijxndin13idjsb319upeb319eub13beu9139ubsd139uodeb319uoe13e9
     expiration: 7200
-  profiles:
-    active: dev
-
-
-

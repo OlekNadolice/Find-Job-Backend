@@ -22,7 +22,7 @@ public class Employer {
     private UUID id;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private CustomUser user;
 

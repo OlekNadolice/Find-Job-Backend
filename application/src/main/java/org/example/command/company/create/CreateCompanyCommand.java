@@ -1,5 +1,6 @@
 package org.example.command.company.create;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,10 +32,14 @@ public class CreateCompanyCommand implements IRequest {
     private final String companyDescription;
     @NotBlank(message = "Address is required")
     private final List<Address> companyAddress;
-    @NotNull(message = "Nip number is required")
+
+
+    @Valid
     private final NipNumber companyNipNumber;
-    @NotNull(message = "Regon number is required")
+
+    @Valid
     private final RegonNumber companyRegonNumber;
+
     @NotNull(message = "Creation date is required")
     private final LocalDate companyCreationDate;
 
@@ -52,4 +57,6 @@ public class CreateCompanyCommand implements IRequest {
         this.companyCreationDate = companyCreationDate;
 
     }
+
+
 }
